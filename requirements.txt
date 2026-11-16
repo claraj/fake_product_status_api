@@ -6,7 +6,7 @@ click==8.3.0
     # via flask
 flask==3.1.2
     # via fake-api-key (pyproject.toml)
-gunicorn==23.0.0
+gunicorn==27.0.1
     # via fake-api-key (pyproject.toml)
 itsdangerous==2.2.0
     # via flask
