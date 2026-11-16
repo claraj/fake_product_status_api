@@ -59,12 +59,13 @@ def name_search(name):
     print()
 
 
-def general_search(min_price, max_price, care_level):
+def price_search(min_price, max_price):
     print()
-    print('************* Test general search *************')
+    print('************* Test price search *************')
     
-    url = f'{base_url}/search/search'
-    params = {'min_price': min_price, 'max_price': max_price, 'care_level': care_level}
+    url = f'{base_url}/search/price'
+    params = {'min_price': min_price, 'max_price': max_price}
+    print(params)
     response = requests.get(url, params=params)
 
     if response.status_code == 200:
@@ -72,6 +73,29 @@ def general_search(min_price, max_price, care_level):
         for p in plants:
             print(p.get('name'))
 
+    elif response.status_code == 400:
+        print('Error, bad response')
+        print(response.json())
+
+    else:
+        print('Error', response)
+
+    print()
+
+
+def care_search(care_level):
+    print()
+    print('************* Test care search *************')
+    
+    url = f'{base_url}/search/care'
+    params = {'care_level': care_level}
+    print(params)
+    response = requests.get(url, params=params)
+
+    if response.status_code == 200:
+        plants = response.json()
+        for p in plants:
+            print(p.get('name'))
 
     elif response.status_code == 400:
         print('Error, bad response')
@@ -86,13 +110,16 @@ def general_search(min_price, max_price, care_level):
 
 # order_number = input('Enter your order number: ')
 order_number = '1234567890'
-order_lookup(order_number)
+# order_lookup(order_number)
 
 name = 'palm'
-name_search(name)
+# name_search(name)
 
 min_price = 9.99
 max_price = 20.00
-care = 'easy'
-general_search(min_price, max_price, care)
+price_search(min_price, max_price)
+
+care_level = 'medium;difficult'
+care_search(care_level)
+
 
